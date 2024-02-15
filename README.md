@@ -2,7 +2,7 @@
 
 VodRecovery is the designed to recover Twitch Vods and Clips 
 
-The aim is to continue development of the now archived[VodRecovery]https://github.com/Shishkebaboo/VodRecovery
+The aim is to continue development of the now archived[VodRecovery](https://github.com/Shishkebaboo/VodRecovery)
 
 
 ## Core Features
