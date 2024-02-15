@@ -288,7 +288,7 @@ def manual_clip_recover():
 
 
 def website_clip_recover():
-    tracker_url = input("Enter Twitchtracker/Streamscharts/Sullygnome url:  ")
+    tracker_url = input("Enter Streamscharts/Sullygnome url:  ")
     if not tracker_url.startswith("https://"):
         tracker_url = "https://" + tracker_url
     if "streamscharts" in tracker_url:
@@ -329,7 +329,7 @@ def manual_vod_recover():
 
 
 def website_vod_recover():
-    tracker_url = input("Enter Twitchtracker/Streamscharts/Sullygnome url:  ").strip()
+    tracker_url = input("Enter Streamscharts/Sullygnome url:  ").strip()
     if not tracker_url.startswith("https://"):
         tracker_url = "https://" + tracker_url
     if "streamscharts" in tracker_url:
@@ -341,6 +341,9 @@ def website_vod_recover():
             streamscharts_duration = int(parse_duration_streamscharts(tracker_url))
             if streamscharts_duration >= m3u8_duration + 10:
                 print("Streamscharts is generally considered the most reliable source for this data. The discrepancy in durations is likely an anomaly.")
+        else:
+            print("m3u8_link retrieval failure.. Returning to main menu.")
+            return
     elif "twitchtracker" in tracker_url:
         streamer, video_id = parse_twitchtracker_url(tracker_url)
         m3u8_link = vod_recover(streamer, video_id, parse_datetime_twitchtracker(tracker_url))
@@ -453,7 +456,7 @@ def parse_duration_streamscharts(streamcharts_url):
             streamcharts_duration = bs.find_all('div', {'class': 'text-xs font-bold'})[3].text
             streamcharts_duration_in_minutes = parse_website_duration(streamcharts_duration)
             return streamcharts_duration_in_minutes
-    print("Failed to fetch webpage after 10 retries.")
+        print("Failed to fetch webpage after 10 retries.")
     return None
 
 
@@ -465,6 +468,8 @@ def parse_duration_twitchtracker(twitchtracker_url):
         return twitchtracker_duration
     else:
         print("Error: Unable to fetch webpage. Status code:", response.status_code)
+        if response.status_code == 403:
+            print("Error: TwitchTracker has blocked requests from this script, please try another supported website")
         return None
 
 
@@ -477,6 +482,8 @@ def parse_duration_sullygnome(sullygnome_url):
         return sullygnome_duration_in_minutes
     else:
         print("Error: Unable to fetch webpage. Status code:", response.status_code)
+        if response.status_code == 403:
+            print("Error: Sullygnome has blocked requests from this script, please try another supported website")
         return None
 
 
@@ -500,6 +507,8 @@ def parse_datetime_twitchtracker(twitchtracker_url):
         return twitchtracker_datetime
     else:
         print("Error: Unable to fetch webpage. Status code:", response.status_code)
+        if response.status_code == 403:
+            print("Error: TwitchTracker has blocked requests from this script, please try another supported website")
         return None
 
 
@@ -513,6 +522,8 @@ def parse_datetime_sullygnome(sullygnome_url):
         return str(datetime.now().year) + "-" + formatted_stream_date
     else:
         print("Error: Unable to fetch webpage. Status code:", response.status_code)
+        if response.status_code == 403:
+            print("Error: Sullygnome has blocked requests from this script, please try another supported website")
         return None
 
 
@@ -640,17 +651,20 @@ def validate_playlist_segments(segments):
 
 
 def vod_recover(streamer_name, video_id, timestamp):
-    print("Searching for videos...")
-    vod_age = calculate_days_since_broadcast(timestamp)
-    if vod_age > 60:
-        print("Video is older than 60 days. Chances of recovery are very slim.\n")
-    vod_url = return_supported_qualities(get_vod_urls(streamer_name, video_id, timestamp))
-    if vod_url is None:
-        alternate_websites = '\n'.join(generate_website_links(streamer_name, video_id))
-        print(f"No videos found using the current domain list. Try using an alternate website:\n{alternate_websites}")
+    if timestamp is None:
         return
-    else:
-        return vod_url
+    else: 
+        print("Searching for videos...")
+        vod_age = calculate_days_since_broadcast(timestamp)
+        if vod_age > 60:
+            print("Video is older than 60 days. Chances of recovery are very slim.\n")
+        vod_url = return_supported_qualities(get_vod_urls(streamer_name, video_id, timestamp))
+        if vod_url is None:
+            alternate_websites = '\n'.join(generate_website_links(streamer_name, video_id))
+            print(f"No videos found using the current domain list. Try using an alternate website:\n{alternate_websites}")
+            return
+        else:
+            return vod_url
 
 
 def bulk_vod_recovery():
@@ -961,3 +975,4 @@ def run_vod_recover():
 
 if __name__ == '__main__':
     run_vod_recover()
+

@@ -1,17 +1,9 @@
 # Welcome to VodRecovery
 
-VodRecovery is a Python script designed to access Twitch videos and clips that are either restricted to subscribers or have been deleted.
+VodRecovery is the designed to recover Twitch Vods and Clips 
 
-## Disclaimer
-Effective November 19th, 2023, the VodRecovery repository will be archived and no longer actively maintained. Due to this, I have disabled issues and discussions.
-This decision comes in light of the numerous issues and questions that are not directly related to the repository's code, but rather to changes in third-party websites (Twitch, TwitchTracker, Streamscharts, Sullygnome) it depends upon. These external factors are outside my control and make it impractical to provide consistent support or responses.
-The repository will remain accessible in a read-only format for archival and reference purposes. I appreciate everyone who has supported the repository and shown interest in improving it! Thanks for understanding.
+The aim is to continue development of the now archived[VodRecovery]https://github.com/Shishkebaboo/VodRecovery
 
-## Introduction
-
-- **Author**: Shishkebaboo
-- **Initial Release**: May 3rd, 2022
-- **Influenced By**: [TwitchRecover](https://github.com/TwitchRecover/TwitchRecover) by Daylam Tayari
 
 ## Core Features
 
@@ -20,9 +12,13 @@ The repository will remain accessible in a read-only format for archival and ref
 - Bulk Clip Recovery: Easily recover multiple clips using CSV files from [Sullygnome](https://sullygnome.com/).
 - Random Clip Recovery: Retrieve a selection of random clips (3 clips per iteration).
 - Multiple Formats: Recovered M3U8 links are available in various formats, including - chunked (Source Quality), 1080p60, 1080p30, 720p60, 720p30, 480p60, 480p30
-- Platform Compatibility: VodRecovery is compatible with popular platforms such as [TwitchTracker](https://twitchtracker.com/), [Sullygnome](https://sullygnome.com/), and [Streamscharts](https://streamscharts.com/).
+- Platform Compatibility: VodRecovery is compatible with popular platforms such as [Sullygnome](https://sullygnome.com/) and [Streamscharts](https://streamscharts.com/).
 - Default Timezone: The script uses UTC as the default timezone for recovering VODs.
 - Video Expiry Duration: Receive a notification if a VOD is older than 60 days, helping you stay informed about content availability.
+
+## Updated New Features
+- Added bat file for execution to prevent window closing on crash (so you can read the error messages)
+- Fixed crash on 403 website response during vod recovery, added helpful error message
 
 ## Installation and Setup
 
@@ -33,7 +29,7 @@ The repository will remain accessible in a read-only format for archival and ref
 
 ## Usage
 
-Run the script and follow the interactive menu:
+Run vod_recovery.bat and follow the interactive menu:
 
 ```
 1) VOD Recovery
@@ -79,20 +75,7 @@ The `user_agents.txt` file contains a list of user agents that the script uses t
 ## FFmpeg Installation
 To use FFmpeg with the script, you'll need to install FFmpeg on your system. You can download FFmpeg from the official website [here](https://ffmpeg.org/download.html) and follow the installation instructions for your operating system.
 
-## Pull Requests
-- **Please note this repository does not accept any pull requests**
 
-## Development Environment
+## Original Project
 
-- [PyCharm Community Edition](https://www.jetbrains.com/pycharm/download/)
-- [Visual Studio Code](https://code.visualstudio.com/download)
-- [Sublime Text](https://www.sublimetext.com/download)
-
-## Notes
-
-- Provide examples when submitting issues.
-- Ensure your Video requests comply with [Twitch's Video Retention Policy](https://help.twitch.tv/s/article/video-on-demand).
-
-## Latest Release
-
-- [Stable Release - 1.0.4.0](https://github.com/Shishkebaboo/VodRecovery/releases/tag/vodrecovery-1.0.4.0)
+- **Author**: [Shishkebaboo](https://github.com/Shishkebaboo)
