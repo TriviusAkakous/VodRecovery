@@ -1,0 +1,19 @@
+[
+  {
+    "twitchtracker": {
+      "path": "https://twitchtracker.com/{streamer}/streams/{videoid}"
+    }
+  },
+  {
+    "streamscharts": {
+      "path": "https://streamscharts.com/channels/{streamer}/streams/{videoid}"
+    }
+  },
+  {
+    "sullygnome": {
+      "path": "https://sullygnome.com/channel/{streamer}/stream/{videoid}"
+    }
+  }
+]
+
+

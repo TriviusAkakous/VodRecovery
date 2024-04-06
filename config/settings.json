@@ -1,9 +1,10 @@
 {
+  "DOWNLOAD_M3U8_LIVE_URL": "streamlink -o {} {} best",
   "DOWNLOAD_M3U8_VIDEO_URL": "ffmpeg -i {} -c copy -bsf:a aac_adtstoasc -y {}",
   "DOWNLOAD_M3U8_VIDEO_URL_SLICE": "ffmpeg -ss {} -to {} -i {} -c copy -bsf:a aac_adtstoasc -y {}",
   "DOWNLOAD_M3U8_VIDEO_FILE": "ffmpeg -protocol_whitelist file,http,https,tcp,tls -i {} -c copy -bsf:a aac_adtstoasc -y {}",
   "DOWNLOAD_M3U8_VIDEO_FILE_SLICE": "ffmpeg -protocol_whitelist file,http,https,tcp,tls -ss {} -to {} -i {} -c copy -y {}",
-  "UNMUTE_VIDEO": true,
+  "UNMUTE_VIDEO": false,
   "CHECK_SEGMENTS": true,
   "DOWNLOAD_CLIPS": false,
   "REMOVE_LOG_FILE": true
